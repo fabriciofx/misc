@@ -1,0 +1,20 @@
+# Ignore all
+*
+
+# Unignore all dirs
+!*/
+
+# Unignore all with extensions
+!*.*
+
+# Unignore .gitignore file
+!.gitignore
+
+# Ignore all log files
+*.log
+
+# Ignore .vscode dir
+.vscode
+
+# Ignore .clang-format config file
+.clang-format
