@@ -69,6 +69,7 @@ primitive_types_show()
     SHOW(float);
     SHOW(double);
     SHOW(long double);
+    SHOW(bool);
 }
 
 static void
