@@ -1,0 +1,10 @@
+#include <stdio.h>
+
+int
+main(void)
+{
+    unsigned char name[] = { 0x46, 0x61, 0x62, 0x72, 0x69, 0x63, 0x69, 0x6f, 0x00 };
+    printf("Name: %s\n", name);
+    return 0;
+}
+
