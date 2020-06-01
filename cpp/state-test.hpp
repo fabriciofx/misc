@@ -1,15 +1,15 @@
 #include <functional>
 
 // https://stackoverflow.com/questions/48066747/c-recursive-function-type
-class state
+class StateFn
 {
 public:
-    state() {}
+    StateFn() {}
     template<class T>
-    state(T&& t) : f(std::forward<T>(t)){}
-    operator bool() { return (bool)f; }
-    state operator()() { return f(); }
+    StateFn(T&& state) : func(std::forward<T>(state)){}
+    operator bool() { return (bool)func; }
+    StateFn operator()() { return func(); }
 
 private:
-    std::function<state()> f;
+    std::function<StateFn()> func;
 };

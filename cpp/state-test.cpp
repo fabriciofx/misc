@@ -1,25 +1,27 @@
 #include <iostream>
 #include "state-test.hpp"
 
-state stateEnd()
+StateFn stateEnd()
 {
     std::cout << "end\n";
     return {};
 }
-state stateTransit()
+StateFn stateTransit()
 {
     std::cout << "transit\n";
     return stateEnd;
 }
 
-state stateStart()
+StateFn stateStart()
 {
     std::cout << "start\n";
     return stateTransit;
 }
 
-
-int main() {
-    state s {stateStart};
-    while(s = s());
+int
+main() {
+    StateFn state { stateStart };
+    while (state) {
+        state = state();
+    }
 }
