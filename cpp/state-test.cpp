@@ -1,6 +1,8 @@
+// c++ -O3 -g state-test.cpp -o state-test
 #include <iostream>
 #include "state-test.hpp"
 
+// It works
 StateFn stateEnd()
 {
     std::cout << "end\n";
@@ -18,10 +20,35 @@ StateFn stateStart()
     return stateTransit;
 }
 
+// What I'd like to make it
+StateFn Foo::m3()
+{
+    std::cout << "m3()\n";
+    return {};
+}
+
+StateFn Foo::m2()
+{
+    std::cout << "m2()\n";
+    return Foo::m3();
+}
+
+StateFn Foo::m1()
+{
+    std::cout << "m1()\n";
+    return Foo::m2();
+}
+
 int
 main() {
     StateFn state { stateStart };
     while (state) {
         state = state();
+    }
+
+    // What I'd like to make
+    StateFn state2 { Foo::m1 };
+    while (state2) {
+        state2 = state2();
     }
 }

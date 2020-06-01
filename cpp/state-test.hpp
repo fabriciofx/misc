@@ -13,3 +13,13 @@ public:
 private:
     std::function<StateFn()> func;
 };
+
+// What I'd like to make it
+class Foo
+{
+public:
+    Foo() {}
+    StateFn m1();
+    StateFn m2();
+    StateFn m3();
+};
