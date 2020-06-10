@@ -1,34 +1,48 @@
 #include <iostream>
 #include <list>
+#include <memory>
 
 class Shape {
 public:
-    virtual ~Shape() {}
-    virtual double area() = 0;
+    virtual ~Shape() noexcept {}
+    virtual double area() const noexcept = 0;
 };
 
 class Shapes {
 public:
-    Shapes(Shape* a, Shape* b, Shape* c) {
-        _items.push_back(a);
-        _items.push_back(b);
-        _items.push_back(c);
+    Shapes() = delete;
+    Shapes(Shapes const&) = delete;
+    Shapes& operator =(Shapes const&) = delete;
+    template <typename... Args>
+    Shapes(Args&& ... args) {
+        construct(std::forward<Args>(args) ...);
     }
-    double total() {
+    double total() const noexcept {
         double total = 0.0;
-        for (auto shape : _items) {
+        for (auto const& shape : _items) {
             total += shape->area();
         }
         return total;
     }
 private:
-    std::list<Shape*> _items;
+    template <typename Arg>
+    void construct(Arg&& arg) {
+        _items.push_back(std::forward<Arg>(arg));
+    }
+    template <typename Arg, typename... Args>
+    void construct(Arg&& arg, Args&&... args) {
+        _items.push_back(std::forward<Arg>(arg));
+        construct(std::forward<Args>(args) ...);
+    }
+    std::list<std::shared_ptr<Shape>> _items;
 };
 
 class Circle : public Shape {
 public:
     Circle(double radius) : _radius(radius) {}
-    double area() { return 3.14 * _radius * _radius; }
+    double area() const noexcept {
+        return 3.14 * _radius * _radius;
+    }
 private:
     double _radius;
 };
@@ -36,17 +50,27 @@ private:
 class Rectangle : public Shape {
 public:
     Rectangle(double base, double height) : _base(base), _height(height) {}
-    double area() { return _base * _height; }
+    double area() const noexcept {
+        return _base * _height;
+    }
 private:
     double _base, _height;
 };
 
+class Square : public Shape {
+public:
+    Square(double face) : _face(face) {}
+    double area() const noexcept {
+        return _face * _face;
+    }
+private:
+    double _face;
+};
+
 int main(void)
 {
-    Circle c1(1.5);
-    Circle c2(2.0);
-    Rectangle r1(2.0, 3.0);
-    Shapes shapes(&c1, &c2, &r1);
+    Shapes shapes(std::make_shared<Circle>(1.5), std::make_shared<Circle>(2.0),
+        std::make_shared<Rectangle>(2.0, 3.0), std::make_shared<Square>(2));
     std::cout << "Area total: " << shapes.total() << std::endl;
     return 0;
 }
