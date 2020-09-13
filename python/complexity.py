@@ -1,5 +1,9 @@
+# Precisa instalar o python3 e a matplotlib
 import time
 import matplotlib.pyplot as plt
+
+# Questão retirada do link abaixo
+# http://www.lapix.ufsc.br/ensino/estrutura-de-dados/complexidade-de-algoritmos/
 
 input = [10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 110, 120, 130, 140, 150, 160,
     170, 180, 190, 200]
