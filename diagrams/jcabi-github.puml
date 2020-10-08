@@ -1,0 +1,336 @@
+@startuml jcabi-github
+
+' Width in pixels
+scale 1024 width
+' Height in pixels
+scale 768 height
+left to right direction
+skinparam DefaultFontSize 15
+hide empty members
+skinparam shadowing false
+skinparam backgroundColor transparent
+
+' Title of the diagram
+title
+<size:20>jcabi-github class diagram</size>
+<size:10><color:gray>https://github.com/jcabi/jcabi-github</color></size>
+end title
+
+interface Assignees
+interface Blob
+interface Blobs
+interface Branch
+interface Branches
+'class Bulk
+interface Collaborators
+interface Comment
+interface Comments
+interface Commit
+interface Commits
+interface CommitsComparison
+interface Content
+interface Contents
+interface Coordinates
+interface DeployKey
+interface DeployKeys
+interface Event
+'class Existence
+interface FileChange
+interface Fork
+interface Forks
+'class FromProperties
+interface Gist
+interface GistComment
+interface GistComments
+interface Gists
+interface Git
+interface Github
+interface GitHubThread
+interface Gitignores
+interface Hook
+interface Hooks
+interface Issue
+interface IssueEvents
+interface IssueLabels
+interface Issues
+interface Label
+interface Labels
+interface Language
+interface Limit
+interface Limits
+interface Markdown
+'enum MergeState
+interface Milestone
+interface Milestones
+interface Notification
+interface Notifications
+interface Organization
+interface Organizations
+interface PublicKey
+interface PublicKeys
+interface PublicMembers
+interface Pull
+interface PullComment
+interface PullComments
+interface PullRef
+interface Pulls
+interface Reaction
+interface Reference
+interface References
+interface Release
+interface ReleaseAsset
+interface ReleaseAssets
+interface Releases
+interface Request
+interface Repo
+interface RepoCommit
+interface RepoCommits
+interface Repos
+interface Search
+'class SmartJson
+'class Smarts
+interface Stars
+interface Status
+interface Statuses
+'interface StringEnum
+interface Tag
+interface Tags
+interface ThreadSubscription
+interface Tree
+interface Trees
+interface User
+'interface UserAgent
+interface UserEmails
+interface UserOrganizations
+interface Users
+
+Assignees --> "*" User
+
+Blobs --> Repo
+Blobs --> Blob
+
+Branch --> Repo
+Branch --> Commit
+
+Branches -->  Repo
+Branches --> "*" Branch
+
+Collaborators --> Repo
+Collaborators --> "*" User
+
+Comment --> Issue
+Comment --> "*" Reaction
+
+Comments --> Issue
+Comments --> Comment
+
+Commit --> Repo
+
+Commits --> Repo
+Commits --> Commit
+Commits --> Statuses
+
+CommitsComparison --> Repo
+CommitsComparison --> "*" FileChange
+
+Content --> Repo
+'Content --> InputStream
+
+Contents --> Repo
+Contents --> "*" Content
+Contents --> RepoCommit
+
+DeployKeys --> Repo
+DeployKeys --> "*" DeployKey
+
+Event --> Repo
+
+Forks --> Repo
+Forks --> "*" Fork
+
+Gist --> Github
+Gist --> GistComments
+
+GistComment --> Gist
+
+GistComments --> Gist
+GistComments --> "*" GistComment
+
+Gists --> Github
+Gists --> "*" Gist
+
+Git --> Repo
+Git --> Blobs
+Git --> Commits
+Git --> References
+Git --> Tags
+Git --> Trees
+
+Github --> Request
+Github --> Repos
+Github --> Gists
+Github --> Users
+Github --> Organizations
+Github --> Markdown
+Github --> Limits
+Github --> Search
+Github --> Gitignores
+
+GitHubThread --> ThreadSubscription
+
+Gitignores --> Github
+
+Hook --> Repo
+
+Hooks --> Repo
+Hooks --> "*" Hook
+
+Issue --> Repo
+Issue --> Comments
+Issue --> IssueLabels
+Issue --> "*" Event
+Issue --> "*" Reaction
+
+IssueEvents --> Repo
+IssueEvents --> "*" Event
+
+IssueLabels --> Issue
+IssueLabels --> "*" Label
+
+Issues --> Repo
+Issues --> Issue
+
+Label --> Repo
+
+Labels --> Repo
+Labels --> "*" Label
+
+Limit --> Github
+
+Limits --> Github
+Limits --> Limit
+
+Markdown --> Github
+
+Milestone --> Repo
+
+Milestones --> Repo
+Milestones --> "*" Milestone
+
+Notifications --> "*" Notification
+Notifications --> GitHubThread
+
+Organization --> Github
+Organization --> PublicMembers
+
+Organizations --> "*" Organization
+
+PublicKey --> User
+
+PublicKeys --> User
+PublicKeys --> "*" PublicKey
+
+PublicMembers --> Organization
+PublicMembers --> "*" User
+
+Pull --> Repo
+Pull --> PullRef
+Pull --> "*" Commit
+Pull --> PullComments
+
+PullComment --> Pull
+PullComment --> "*" Reaction
+
+PullComments --> Pull
+PullComments --> "*" PullComment
+
+PullRef --> Repo
+
+Pulls --> Repo
+Pulls --> "*" Pull
+
+Reference --> Repo
+
+References --> Repo
+References --> "*" Reference
+
+Release --> Repo
+Release --> ReleaseAssets
+
+ReleaseAsset --> Release
+'ReleaseAsset --> InputStream
+
+ReleaseAssets --> Release
+ReleaseAssets --> "*" ReleaseAsset
+
+Releases --> Repo
+Releases --> "*" Release
+
+Repo --> Github
+Repo --> Coordinates
+Repo --> Issues
+Repo --> Milestones
+Repo --> Pulls
+Repo --> Hooks
+Repo --> IssueEvents
+Repo --> Labels
+Repo --> Assignees
+Repo --> Releases
+Repo --> DeployKeys
+Repo --> Forks
+Repo --> RepoCommits
+Repo --> Branches
+Repo --> Contents
+Repo --> Collaborators
+Repo --> Git
+Repo --> Stars
+Repo --> Notifications
+Repo --> "*" Language
+
+RepoCommit -->  Repo
+
+RepoCommits --> "*" RepoCommit
+RepoCommits --> CommitsComparison
+
+Repos --> Github
+Repos --> "*" Repo
+Repos --> Coordinates
+
+Search --> Github
+Search --> "*" Repo
+Search --> "*" Issue
+Search --> "*" User
+Search --> "*" Content
+
+Stars --> Repo
+
+Status --> Commit
+
+Statuses --> Commit
+Statuses --> "*" Status
+
+Tag --> Repo
+
+Tags --> Repo
+Tags --> Tag
+
+Tree --> Repo
+
+Trees --> Repo
+Trees --> Tree
+
+User --> Github
+User --> UserOrganizations
+User --> PublicKeys
+User --> UserEmails
+User --> Notifications
+
+UserOrganizations --> Github
+UserOrganizations --> User
+UserOrganizations --> "*" Organization
+
+Users --> Github
+Users --> User
+Users -- "*" User
+
+@enduml

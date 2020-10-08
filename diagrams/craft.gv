@@ -1,0 +1,57 @@
+digraph DFA {
+    //rankdir = LR
+    overlap = false
+
+    // edge [
+    //     fontname = "Verdana"
+    // ]
+
+    // node [
+    //     shape = circle,
+    //     fontname = "Verdana",
+    //     margin = 0
+    // ]
+
+    parse -> declaration
+        declaration -> classDeclaration
+            classDeclaration -> StmtClass
+                StmtClass -> id
+                StmtClass -> ExprVariable
+                StmtClass -> function
+        declaration -> function
+        declaration -> varDeclaration
+            varDeclaration -> expression
+        declaration -> statement
+    statement -> forStatement
+        forStatement -> varDeclaration
+        forStatement -> expressionStatement
+        forStatement -> expression
+            expression -> assignment
+                assignment -> assignment
+                assignment -> or
+                    or -> and
+                        and -> equality
+                            equality -> comparison
+                                comparison -> addition
+                                    addition -> multiplication
+                                        multiplication -> unary
+                                            unary -> call
+                                                call -> primary
+                                                call -> finishCall
+    primary -> expression
+        forStatement -> statement
+    statement -> ifStatement
+        ifStatement -> expression
+        ifStatement -> statement
+    statement -> printStatement
+        printStatement -> expression
+    statement -> returnStatement
+        returnStatement -> expression
+    statement -> whileStatement
+        whileStatement -> expression
+        whileStatement -> statement
+    statement -> block
+        block -> declaration
+    statement -> expressionStatement
+        expressionStatement -> expression
+}

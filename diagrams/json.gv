@@ -1,0 +1,53 @@
+digraph DFA {
+    rankdir = LR
+    overlap = false
+
+    edge [
+        fontname = "Verdana"
+    ]
+
+    node [
+        shape = circle,
+        fontname = "Verdana",
+        margin = 0
+    ]
+
+    sp [ label = "' '" ]
+    lf [ label = "\\n" ]
+    cr [ label = "\\r" ]
+    ht [ label = "\\t" ]
+
+    lb [ label = "{" ]
+    rb [ label = "}" ]
+    td [ label = ":" ]
+
+    // whitespace
+    // sp: space
+    ws -> sp
+    sp -> sp
+    sp -> lf
+    sp -> cr
+    sp -> ht
+    // lf: linefeed
+    ws -> lf
+    lf -> sp
+    lf -> lf
+    lf -> cr
+    lf -> ht
+    // cr: carriage return
+    ws -> cr
+    cr -> sp
+    cr -> lf
+    cr -> cr
+    cr -> ht
+    // ht: horizontal tab
+    ws -> ht
+    ht -> sp
+    ht -> lf
+    ht -> cr
+    ht -> ht
+
+    // object
+    S0 -> lb
+    S0 -> rb
+}
